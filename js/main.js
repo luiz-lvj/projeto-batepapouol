@@ -37,7 +37,6 @@ function loadChat(){
     
     chatPromise.then((response)=>{
         keepChatInterval = setInterval(()=>{
-            console.log(response.data);
             loadMessages(response.data);
             keepChat();
         }, 3000);
@@ -53,11 +52,39 @@ function keepChat(){
     chatPromise.catch(failKeepChat);
 }
 function loadMessages(vectorMessages){
-    /*AQUIIIIIIIIII */
-    /*AQUIIIIIIIIII */
-    /*AQUIIIIIIIIII */
-    /*AQUIIIIIIIIII */
-    /*AQUIIIIIIIIII */
+    let chat = document.querySelector(".chat");
+    chat.innerHTML = "";
+    for(let objMessage of vectorMessages){
+        if(objMessage.type === "status"){
+            chat.innerHTML += createStatusMessage(objMessage);
+        }
+        else if (objMessage.type === "message"){
+            chat.innerHTML += createPublicMessage(objMessage);
+        }
+        else if(objMessage.type === "private_message" && objMessage.to === myUserName){
+            chat.innerHTML += createPublicMessage(objMessage);
+        }
+    }
+    const lastMessage = document.querySelector(".chat").lastChild;
+    lastMessage.scrollIntoView();
+}
+function createStatusMessage(obj){
+    const liMessage = `<li class="message status">
+        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>${obj.text}</p>
+    </li>`;
+    return liMessage;
+}
+function createPublicMessage(obj){
+    const liMessage = `<li class="message normal">
+        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>para <span class="username-text">${obj.to} </span>: ${obj.text}</p>
+    </li>`;
+    return liMessage;
+}
+function createPrivateMessage(obj){
+    const liMessage = `<li class="message normal">
+        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>para <span class="username-text">${obj.to} </span>: ${obj.text}</p>
+    </li>`;
+    return liMessage;
 }
 function failLoadInitialChat(){
     alert("Não foi possível carregar suas mensagens\nTente logar-se novamente");
@@ -108,10 +135,8 @@ function restartHomePage(){
     if (loginPage.classList.contains("logged")){
         loginPage.classList.remove("logged");
     }
-    console.log(loginPage);
 
     let inputUserName = document.querySelector(".input-username");
-    console.log(inputUserName);
     let buttonLogin = document.querySelector(".button-login");
 
     if(inputUserName.classList.contains("hide")){
