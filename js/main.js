@@ -8,7 +8,7 @@ function loginUser(){
     const loginPromise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants", data);
 
     loginPromise.then();
-    loginPromise.catch();
+    loginPromise.catch(failInitialLogin);
 
     loadingPage();
 }
@@ -17,17 +17,49 @@ function loadingPage(){
     let inputUserName = document.querySelector(".input-username");
     let buttonLogin = document.querySelector(".button-login");
 
+    inputUserName.classList.add("hide");
+    buttonLogin.classList.add("hide");
+
     let loadingImg = document.querySelector(".loading-img");
     let loadingTxt = document.querySelector(".loading-text");
 
-    inputUserName.classList.add("hide");
-    buttonLogin.classList.add("hide");
     if(loadingImg.classList.contains("hide")){
         loadingImg.classList.remove("hide");
     }
     if(loadingTxt.classList.contains("hide")){
         loadingTxt.classList.remove("hide");
     }
+}
+
+function failInitialLogin(){
+    alert("Não foi possível logar '-'\nTente novamente");
+    restartHomePage();
+}
+
+function restartHomePage(){
+    let loginPage = document.querySelector(".login-page");
+    if (loginPage.classList.contains("logged")){
+        loginPage.classList.remove("logged");
+    }
+    console.log(loginPage);
+
+    let inputUserName = document.querySelector(".input-username");
+    console.log(inputUserName);
+    let buttonLogin = document.querySelector(".button-login");
+
+    if(inputUserName.classList.contains("hide")){
+        inputUserName.value = "";
+        inputUserName.classList.remove("hide");
+    }
+    if(buttonLogin.classList.contains("hide")){
+        buttonLogin.classList.toggle("hide");
+    }
+
+    let loadingImg = document.querySelector(".loading-img");
+    let loadingTxt = document.querySelector(".loading-text");
+    
+    loadingImg.classList.add("hide");
+    loadingTxt.classList.add("hide");
 }
 
 
