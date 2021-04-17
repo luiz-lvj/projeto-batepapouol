@@ -1,16 +1,33 @@
 const STATUS_CODE_OK = 200;
 const STATUS_CODE_BADREQUEST = 400;
 let myUserName;
+let keepLoggedInterval;
 
 function loginUser(){
     myUserName = document.querySelector(".input-username").value;
     let data = {name: myUserName};
     const loginPromise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants", data);
 
-    loginPromise.then();
+    loginPromise.then(()=>{
+        allowChat();
+        keepLoggedInterval = setInterval(keepLogged, 5000);
+    });
     loginPromise.catch(failInitialLogin);
 
     loadingPage();
+}
+function keepLogged(){
+    let data = {name: myUserName};
+    let loginPromise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", data);
+    loginPromise.then(()=>{
+        return;
+    });
+    loginPromise.catch(failKeepLogin);
+}
+
+function allowChat(){
+    let loginPage = document.querySelector(".login-page");
+    loginPage.classList.add("logged");
 }
 
 function loadingPage(){
@@ -36,7 +53,13 @@ function failInitialLogin(){
     restartHomePage();
 }
 
+function failKeepLogin(){
+    alert("Não foi possível manter sua conexão\nTente se logar novamente");
+    restartHomePage();
+}
+
 function restartHomePage(){
+    clearInterval(keepLoggedInterval);
     let loginPage = document.querySelector(".login-page");
     if (loginPage.classList.contains("logged")){
         loginPage.classList.remove("logged");
