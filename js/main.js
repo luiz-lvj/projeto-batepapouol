@@ -36,8 +36,8 @@ function loadChat(){
     const chatPromise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages");
     
     chatPromise.then((response)=>{
+        loadMessages(response.data);
         keepChatInterval = setInterval(()=>{
-            loadMessages(response.data);
             keepChat();
         }, 3000);
     });
@@ -67,6 +67,7 @@ function loadMessages(vectorMessages){
     }
     const lastMessage = document.querySelector(".chat").lastChild;
     lastMessage.scrollIntoView();
+    console.log(vectorMessages[vectorMessages.length -1]);
 }
 function createStatusMessage(obj){
     const liMessage = `<li class="message status">
