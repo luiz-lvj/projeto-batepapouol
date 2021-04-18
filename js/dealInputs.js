@@ -18,11 +18,15 @@ function sendMessage(){
     if(strInput === ""){
         return;
     }
+    let typeMessage = "message";
+    if(privateMessage){
+        typeMessage = "private_message";
+    }
     data = {
         from: myUserName,
         to: "Todos",
         text: strInput,
-        type: "message"
+        type: typeMessage
     };
     const sendPromise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", data);
     sendPromise.then(keepChat);

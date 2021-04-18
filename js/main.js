@@ -61,14 +61,18 @@ function loadMessages(vectorMessages){
     let chat = document.querySelector(".chat");
     chat.innerHTML = "";
     for(let objMessage of vectorMessages){
+        let boolReceivePrivate = (objMessage.to === myUserName);
+        boolReceivePrivate = boolReceivePrivate || (objMessage.to === "Todos");
+        boolReceivePrivate = boolReceivePrivate && (objMessage.type === "private_message");
+
         if(objMessage.type === "status"){
             chat.innerHTML += createStatusMessage(objMessage);
         }
         else if (objMessage.type === "message"){
             chat.innerHTML += createPublicMessage(objMessage);
         }
-        else if(objMessage.type === "private_message" && objMessage.to === myUserName){
-            chat.innerHTML += createPublicMessage(objMessage);
+        else if(boolReceivePrivate){
+            chat.innerHTML += createPrivateMessage(objMessage);
         }
     }
     const lastMessage = document.querySelector(".chat").lastChild;
