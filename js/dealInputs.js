@@ -1,3 +1,9 @@
+document.querySelector(".input-username").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        loginUser();
+    }
+});
+
 document.querySelector(".input-message").addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
         sendMessage();

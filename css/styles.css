@@ -132,6 +132,7 @@ body{
     opacity: 1;
     font-style: italic;
     font-size: 14px;
+    border: none;
 }
 .send-message{
     font-size: 26px;
