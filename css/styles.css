@@ -34,6 +34,7 @@ body{
     text-align: center;
     color: #AEAEAE;
     font-size: 18px;
+    border: none;
 }
 .button-login{
     height: 45px;
