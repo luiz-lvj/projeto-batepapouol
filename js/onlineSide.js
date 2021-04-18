@@ -42,3 +42,7 @@ function setPrivacity(obj){
         brotherPrivacityItem.classList.add("hide");
     }
 }
+function logoutUser(){
+    backToChat();
+    restartHomePage();
+}

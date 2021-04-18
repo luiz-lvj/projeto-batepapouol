@@ -97,3 +97,13 @@
     font-size: 26px;
     font-weight: bold;
 }
+.button-logout{
+    height: 40px;
+    width: 100px;
+    background: red;
+    border: none;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 19px;
+}
