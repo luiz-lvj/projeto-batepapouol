@@ -4,7 +4,7 @@ function loginUser(){
     const loginPromise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants", data);
 
     loginPromise.then(()=>{
-        allowChat();
+        loadChat();
         keepLoggedInterval = setInterval(keepLogged, 5000);
     });
     loginPromise.catch(failInitialLogin);
@@ -23,19 +23,30 @@ function keepLogged(){
 function allowChat(){
     let loginPage = document.querySelector(".login-page");
     loginPage.classList.add("logged");
-    loadChat();
 }
 
 function loadChat(){
     const chatPromise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages");
     
     chatPromise.then((response)=>{
+        allowChat();
         loadMessages(response.data);
         keepChatInterval = setInterval(()=>{
             keepChat();
         }, 3000);
     });
     chatPromise.catch(failLoadInitialChat);
+    loadingMessages();
+}
+function loadingMessages(){
+    let loadingTxt = document.querySelector(".loading-text");
+    if(!loadingTxt.classList.contains("hide")){
+        loadingTxt.classList.add("hide");
+    }
+    let loadingMsg = document.querySelector(".loading-messages");
+    if(loadingMsg.classList.contains("hide")){
+        loadingMsg.classList.remove("hide");
+    }
 }
 
 function keepChat(){
@@ -45,6 +56,7 @@ function keepChat(){
     });
     chatPromise.catch(failKeepChat);
 }
+
 function loadMessages(vectorMessages){
     let chat = document.querySelector(".chat");
     chat.innerHTML = "";
@@ -61,7 +73,6 @@ function loadMessages(vectorMessages){
     }
     const lastMessage = document.querySelector(".chat").lastChild;
     lastMessage.scrollIntoView();
-    console.log(vectorMessages[vectorMessages.length -1]);
 }
 
 function failLoadInitialChat(){

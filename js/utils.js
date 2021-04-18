@@ -49,7 +49,9 @@ function restartHomePage(){
 
     let loadingImg = document.querySelector(".loading-img");
     let loadingTxt = document.querySelector(".loading-text");
+    let loadingMsg = document.querySelector(".loading-messages");
     
     loadingImg.classList.add("hide");
     loadingTxt.classList.add("hide");
+    loadingMsg.classList.add("hide");
 }

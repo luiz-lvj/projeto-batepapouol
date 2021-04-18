@@ -1,3 +1,9 @@
+document.querySelector(".input-message").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
+
 function sendMessage(){
     let inputMessage = document.querySelector(".input-message");
     let strInput = inputMessage.value;
@@ -13,5 +19,8 @@ function sendMessage(){
         type: "message"
     };
     const sendPromise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", data);
-
+    sendPromise.then(keepChat);
+    sendPromise.catch(()=>{
+        alert("Não foi possível enviar a mensagem\nTente novamente");
+    });
 }
