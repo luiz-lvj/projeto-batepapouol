@@ -126,6 +126,7 @@ body{
 }
 .input-message{
     border: none;
+    margin-bottom: 5px;
 }
 .input-message::placeholder{
     color: #000000;
@@ -133,6 +134,10 @@ body{
     font-style: italic;
     font-size: 14px;
     border: none;
+}
+.detail-message-to-send{
+    font-size: 14px;
+    color: gray;
 }
 .send-message{
     font-size: 26px;

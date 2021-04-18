@@ -24,7 +24,7 @@ function sendMessage(){
     }
     data = {
         from: myUserName,
-        to: "Todos",
+        to: destinataryName,
         text: strInput,
         type: typeMessage
     };

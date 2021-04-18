@@ -6,6 +6,8 @@ function loginUser(){
     loginPromise.then(()=>{
         loadChat();
         keepLoggedInterval = setInterval(keepLogged, 5000);
+        loadOnlineUsers();
+        getAllUsersOnlineInterval = setInterval(loadOnlineUsers, 10000);
     });
     loginPromise.catch(failInitialLogin);
 
@@ -63,6 +65,7 @@ function loadMessages(vectorMessages){
     for(let objMessage of vectorMessages){
         let boolReceivePrivate = (objMessage.to === myUserName);
         boolReceivePrivate = boolReceivePrivate || (objMessage.to === "Todos");
+        boolReceivePrivate = boolReceivePrivate || (objMessage.from === myUserName);
         boolReceivePrivate = boolReceivePrivate && (objMessage.type === "private_message");
 
         if(objMessage.type === "status"){

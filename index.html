@@ -33,6 +33,7 @@
     <div class="bottom">
         <div class="messages-bottom">
             <input type="text" placeholder="Escreva aqui..." class="input-message">
+            <p class="detail-message-to-send"></p>
         </div>
         <ion-icon name="paper-plane-outline" class="send-message" onClick="sendMessage()"></ion-icon>
     </div>
@@ -43,33 +44,6 @@
         <div class="online-info">
             <p class="online-title">Escolha um contato para enviar mensagem:</p>
             <ul class="list-users">
-                <li class="user-online all">
-                    <div class="left-side-info">
-                        <ion-icon name="people" class="user-online-icon"></ion-icon>
-                        <p class="user-online-name">Todos</p>
-                    </div>
-                    <div class="right-side-info">
-                        <ion-icon name="checkmark-sharp" class="destinatary"></ion-icon>
-                    </div>
-                </li>
-                <li class="user-online">
-                    <div class="left-side-info">
-                        <ion-icon name="person-circle" class="user-online-icon"></ion-icon>
-                        <p class="user-online-name">João</p>
-                    </div>
-                    <div class="right-side-info">
-                        <ion-icon name="checkmark-sharp" class="destinatary hide"></ion-icon>
-                    </div>
-                </li>
-                <li class="user-online">
-                    <div class="left-side-info">
-                        <ion-icon name="person-circle" class="user-online-icon"></ion-icon>
-                        <p class="user-online-name">Maria</p>
-                    </div>
-                    <div class="right-side-info">
-                        <ion-icon name="checkmark-sharp" class="destinatary hide"></ion-icon>
-                    </div>
-                </li>
             </ul>
             <p class="online-title">Escolha a visibilidade:</p>
             <ul class="privacity-options">
@@ -102,8 +76,8 @@
     <!-- JS scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/utils.js"></script>
-    <script src="js/main.js"></script>
     <script src="js/onlineSide.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/dealInputs.js"></script>
 </body>
 </html>
