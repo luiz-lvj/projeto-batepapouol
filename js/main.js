@@ -1,9 +1,3 @@
-const STATUS_CODE_OK = 200;
-const STATUS_CODE_BADREQUEST = 400;
-let myUserName;
-let keepLoggedInterval = null;
-let keepChatInterval = null;
-
 function loginUser(){
     myUserName = document.querySelector(".input-username").value;
     let data = {name: myUserName};
@@ -69,24 +63,7 @@ function loadMessages(vectorMessages){
     lastMessage.scrollIntoView();
     console.log(vectorMessages[vectorMessages.length -1]);
 }
-function createStatusMessage(obj){
-    const liMessage = `<li class="message status">
-        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>${obj.text}</p>
-    </li>`;
-    return liMessage;
-}
-function createPublicMessage(obj){
-    const liMessage = `<li class="message normal">
-        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>para <span class="username-text">${obj.to} </span>: ${obj.text}</p>
-    </li>`;
-    return liMessage;
-}
-function createPrivateMessage(obj){
-    const liMessage = `<li class="message normal">
-        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>para <span class="username-text">${obj.to} </span>: ${obj.text}</p>
-    </li>`;
-    return liMessage;
-}
+
 function failLoadInitialChat(){
     alert("Não foi possível carregar suas mensagens\nTente logar-se novamente");
     restartHomePage();
@@ -122,35 +99,4 @@ function failInitialLogin(){
 function failKeepLogin(){
     alert("Não foi possível manter sua conexão\nTente se logar novamente");
     restartHomePage();
-}
-
-function restartHomePage(){
-    if(keepLoggedInterval){
-        clearInterval(keepLoggedInterval);
-    }
-    
-    if(keepChatInterval){
-        clearInterval(keepChatInterval);
-    }
-    let loginPage = document.querySelector(".login-page");
-    if (loginPage.classList.contains("logged")){
-        loginPage.classList.remove("logged");
-    }
-
-    let inputUserName = document.querySelector(".input-username");
-    let buttonLogin = document.querySelector(".button-login");
-
-    if(inputUserName.classList.contains("hide")){
-        inputUserName.value = "";
-        inputUserName.classList.remove("hide");
-    }
-    if(buttonLogin.classList.contains("hide")){
-        buttonLogin.classList.toggle("hide");
-    }
-
-    let loadingImg = document.querySelector(".loading-img");
-    let loadingTxt = document.querySelector(".loading-text");
-    
-    loadingImg.classList.add("hide");
-    loadingTxt.classList.add("hide");
 }
