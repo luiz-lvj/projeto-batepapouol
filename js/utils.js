@@ -1,6 +1,7 @@
 let myUserName;
 let keepLoggedInterval = null;
 let keepChatInterval = null;
+let destinataryName = "Todos";
 
 function createStatusMessage(obj){
     const liMessage = `<li class="message status">
@@ -16,7 +17,7 @@ function createPublicMessage(obj){
 }
 function createPrivateMessage(obj){
     const liMessage = `<li class="message normal">
-        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>para <span class="username-text">${obj.to} </span>: ${obj.text}</p>
+        <p class="message-text"><span class="message-time">(${obj.time}) </span><span class="username-text">${obj.from} </span>reservadamente para <span class="username-text">${obj.to} </span>: ${obj.text}</p>
     </li>`;
     return liMessage;
 }
